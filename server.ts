@@ -19,7 +19,7 @@ app.use(express.json());
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World! try'));
 
-app.get('/add/:a/:b', (req: Request, res: Response) =>
+app.get('/add/:a/:b/:c', (req: Request, res: Response) =>
     res.send(req.params.a + req.params.b));
 
 const tuitController = (TuitController.getInstance(app));

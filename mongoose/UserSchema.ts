@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import User from "../models/User";
 const UserSchema = new mongoose.Schema<User>({
-    username: {type: String, required: true},
-    password: {type: String, required: true},
+    username: {type: String, required: true, default: `testusername${Date.now()}`},
+    password: {type: String, required: true, default: `testpassword${Date.now()}`},
     firstName: String,
     lastName: String,
-    email: String,
+    email: {type: String, default: `testemail${Date.now()}`},
     profilePhoto: String,
     headerImage: String,
     accountType: {type: String, default: 'PERSONAL', enum: ['PERSONAL', 'ACADEMIC', 'PROFESSIONAL']},
@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema<User>({
     location: {
         latitude: {type: Number, default: 0.0},
         longitude: {type: Number, default: 0.0},
-    }
+    },
+    salary: {type: Number, default: 50000}
 }, {collection: 'users'});
 export default UserSchema;
