@@ -55,7 +55,7 @@ export default class LikeDao implements LikeDaoI {
      * @param {string} tid the specified tuit ID, the primary key of tuit
      * @returns Promise To be notified when likes are created in the database
      */
-    userLikesTuit = async (uid: string, tid: string): Promise<any> =>
+    userLikesTuit = async (uid: string, tid: string): Promise<Like> =>
         LikeModel.create({tuit: tid, likedBy: uid});
 
 

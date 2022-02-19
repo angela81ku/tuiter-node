@@ -4,6 +4,8 @@ import express, {Request, Response} from 'express';
 import TuitController from "./controllers/TuitController";
 import UserController from "./controllers/UserController";
 import LikeController from "./controllers/LikeController";
+import FollowController from "./controllers/FollowController";
+
 // import TuitDao from "./daos/TuitDao";
 // import UserDao from "./daos/UserDao";
 
@@ -26,5 +28,6 @@ app.get('/add/:a/:b/:c', (req: Request, res: Response) =>
 const tuitController = (TuitController.getInstance(app));
 const userController = UserController.getInstance(app);
 const likeController = LikeController.getInstance(app);
+const followController = FollowController.getInstance(app);
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
