@@ -3,8 +3,8 @@
  * to integrate with MongoDB
  */
 import UserDaoI from "../interfaces/UserDaoI"
-import User from "../models/User"
-import UserModel from "../mongoose/UserModel";
+import User from "../models/users/User"
+import UserModel from "../mongoose/users/UserModel";
 
 /**
  * Implements Data Access Object managing data storage
@@ -66,6 +66,7 @@ export default class UserDao implements UserDaoI {
      * update user object the salary by username
      * @param {string} username one of the properties of the user object
      * @param {number} salary one of the properties of the usre object
+     * @returns Promise To be notified when user is updated in the database
      */
     updateUserSalaryByUsername = async (username: string, salary: number): Promise<any> =>
         UserModel.updateOne(
@@ -91,12 +92,15 @@ export default class UserDao implements UserDaoI {
      * find user by username and password
      * @param {string} username one of the mandatory properties of the user object
      * @param {string} password one of the mandatory properties of the user object
+     * @returns Promise To be notified when user is retrieved from the
+     * database
    */
     findUserByCredentials = async (username: string, password: string): Promise<any> =>
         UserModel.findOne({username: username, password: password});
     /**
      * find user by username
      * @param {string} username one of the mandatory properties of the user object
+     * @returns Promised when user retrieved from database
      */
     findUserByUsername = async (username: string): Promise<any> =>
         UserModel.findOne({username});

@@ -1,9 +1,9 @@
 import mongoose, {Schema} from "mongoose";
-import Tuit from "../models/Tuit";
-import User from "../models/User";
+import Tuit from "../models/tuits/Tuit";
+import User from "../models/users/User";
 import Tag from "../models/Tag";
 import Topic from "../models/Topic";
-import TuitSchema from "./TuitSchema";
+import TuitSchema from "./tuits/TuitSchema";
 
 
 const TagSchema = new mongoose.Schema<Tag>({

@@ -5,7 +5,7 @@
 import express, {Request, Response, Express} from "express";
 import TuitDao from "../daos/TuitDao";
 import TuitControllerI from "../interfaces/TuitControllerI";
-import Tuit from "../models/Tuit";
+import Tuit from "../models/tuits/Tuit";
 /**
  * @class TuitController Implements RESTful Web service API for tuits resource.
  * Defines the following HTTP endpoints:
@@ -45,17 +45,6 @@ export default class TuitController implements TuitControllerI{
         return TuitController.tuitController;
     }
 
-    // constructor(app: Express, tuitDao: TuitDao) {
-    //     this.app = app;
-    //     this.tuitDao = tuitDao;
-    //     this.app.get('/tuits', this.findAllTuits);
-    //     this.app.get('/tuits/:tuitId', this.findTuitById);
-    //     this.app.get('/users/:userId/tuits', this.findTuitsByUser)
-    //     this.app.post('/tuits', this.createTuit);
-    //     this.app.delete('/tuits/:tuitId', this.deleteTuit);
-    //     this.app.put('/tuits/:tuitId', this.updateTuit);
-    //
-    // }
     /**
      * Retrieves all tuits from the database and returns an array of tuits.
      * @param {Request} req Represents request from client

@@ -2,7 +2,7 @@
  * implements the data model to represent users in the database
  */
 import mongoose from "mongoose";
-import User from "../models/User";
+import User from "../../models/users/User";
 const UserSchema = new mongoose.Schema<User>({
     username: {type: String, required: true, default: `testusername${Date.now()}`},
     password: {type: String, required: true, default: `testpassword${Date.now()}`},

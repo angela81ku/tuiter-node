@@ -4,12 +4,12 @@
 
 
 import mongoose, {Schema} from "mongoose";
-import Tuit from "../models/Tuit";
-import User from "../models/User";
-import Tag from "../models/Tag";
-import Topic from "../models/Topic";
-import TagSchema from "./TagSchema";
-import TopicSchema from "./TopicSchema";
+import Tuit from "../../models/tuits/Tuit";
+import User from "../../models/users/User";
+import Tag from "../../models/Tag";
+import Topic from "../../models/Topic";
+import TagSchema from "../TagSchema";
+import TopicSchema from "../TopicSchema";
 
 const TuitSchema = new mongoose.Schema<Tuit>({
     tuit: {type: String, required: true},
