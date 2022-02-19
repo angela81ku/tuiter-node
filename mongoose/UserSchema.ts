@@ -1,3 +1,6 @@
+/**
+ * implements the data model to represent users in the database
+ */
 import mongoose from "mongoose";
 import User from "../models/User";
 const UserSchema = new mongoose.Schema<User>({

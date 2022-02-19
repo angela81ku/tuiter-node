@@ -1,43 +1,39 @@
-import TuitDaoI from "../interfaces/TuitDaoI"
-import Tuit from "../models/Tuit"
+/**
+ * @file Implements DAO managing data storage of tuits. Uses mongoose TuitModel
+ * to integrate with MongoDB
+ */
 import TuitModel from "../mongoose/TuitModel";
-import TuitSchema from "../mongoose/TuitSchema";
+import Tuit from "../models/Tuit";
+import TuitDaoI from "../interfaces/TuitDaoI";
 
+/**
+ * @class UserDao Implements Data Access Object managing data storage
+ * of Users
+ * @property {UserDao} userDao Private single instance of UserDao
+ */
 export default class TuitDao implements TuitDaoI{
-    private static TuitDao: TuitDao | null = null;
-    public static getInstance = (): TuitDao =>{
-        if(TuitDao.TuitDao === null){
-            TuitDao.TuitDao = new TuitDao();
+    private static tuitDao: TuitDao | null = null;
+    public static getInstance = (): TuitDao => {
+        if(TuitDao.tuitDao === null) {
+            TuitDao.tuitDao = new TuitDao();
         }
-        return TuitDao.TuitDao;
+        return TuitDao.tuitDao;
     }
-    private constructor() {
-    }
-
-
-    async findAllTuits(): Promise<Tuit[]> {
-        return TuitModel.find();
-    }
-    async findTuitById(tid: string): Promise<any> {
-        return TuitModel.findById(tid);
-    }
-    // professor version
-    // findTuitById = async (uid: string): Promise<any> =>
-    //     TuitModel.findById(uid)
-    //         .populate("postedBy")
-    //         .exec();
-    async findTuitsByUser(uid: string): Promise<Tuit[]>{
-        return TuitModel.find({postedBy:uid})
-    }
-    async createTuit(Tuit: Tuit): Promise<Tuit> {
-        return TuitModel.create(Tuit);
-    }
-    async deleteTuit(uid: string):  Promise<any> {
-        return TuitModel.deleteOne({_id: uid});
-    }
-    async updateTuit(uid: string, tuit: Tuit): Promise<any> {
-        return TuitModel.updateOne({_id: uid}, {$set: tuit});
-    }
-
-
+    private constructor() {}
+    findAllTuits = async (): Promise<Tuit[]> =>
+        TuitModel.find();
+    findAllTuitsByUser = async (uid: string): Promise<Tuit[]> =>
+        TuitModel.find({postedBy: uid});
+    findTuitById = async (uid: string): Promise<any> =>
+        TuitModel.findById(uid)
+            .populate("postedBy")
+            .exec();
+    createTuitByUser = async (uid: string, tuit: Tuit): Promise<Tuit> =>
+        TuitModel.create({...tuit, postedBy: uid});
+    updateTuit = async (uid: string, tuit: Tuit): Promise<any> =>
+        TuitModel.updateOne(
+            {_id: uid},
+            {$set: tuit});
+    deleteTuit = async (uid: string): Promise<any> =>
+        TuitModel.deleteOne({_id: uid});
 }
