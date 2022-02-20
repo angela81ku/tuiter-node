@@ -6,6 +6,7 @@ import UserController from "./controllers/UserController";
 import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
+import MessageController from "./controllers/MessageController";
 
 // import TuitDao from "./daos/TuitDao";
 // import UserDao from "./daos/UserDao";
@@ -31,5 +32,7 @@ const userController = UserController.getInstance(app);
 const likeController = LikeController.getInstance(app);
 const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
+const messageController = MessageController.getInstance(app);
+
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);

@@ -102,7 +102,7 @@ export default class TuitController implements TuitControllerI{
      * @param {Request} req Represents request from client, including path
      * parameter tid identifying the primary key of the tuit to be removed
      * @param {Response} res Represents response to client, including status
-     * on whether deleting a user was successful or not
+     * on whether deleting a tuit was successful or not
      */
     deleteTuit = (req: Request, res: Response) =>
         TuitController.tuitDao.deleteTuit(req.params.tid)
