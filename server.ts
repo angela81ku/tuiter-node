@@ -15,8 +15,8 @@ import mongoose from "mongoose";
 
 const app = express();
 const mongoUN = 'tuit'
-const mongoPW = 'supersecretpassword'
-const mongoURL = `mongodb+srv://${mongoUN}:${mongoPW}@cluster0.g4fpb.mongodb.net/tuiter?retryWrites=true&w=majority`
+
+const mongoURL = `mongodb+srv://${mongoUN}:`+process.env.DB_PASSWORD+`@cluster0.g4fpb.mongodb.net/tuiter?retryWrites=true&w=majority`
 mongoose.connect(mongoURL);
 
 app.use(express.json());
