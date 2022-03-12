@@ -7,7 +7,7 @@ import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
-
+var cors = require('cors');
 // import TuitDao from "./daos/TuitDao";
 // import UserDao from "./daos/UserDao";
 
@@ -20,7 +20,7 @@ const mongoURL = `mongodb+srv://${mongoUN}:`+process.env.DB_PASSWORD+`@cluster0.
 mongoose.connect(mongoURL);
 
 app.use(express.json());
-
+app.use(cors());
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World! try'));
 

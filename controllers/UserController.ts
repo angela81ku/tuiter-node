@@ -55,6 +55,8 @@ export default class UserController implements UserControllerI {
                 UserController.userController.deleteUser);
             app.delete("/api/users",
                 UserController.userController.deleteAllUsers);
+            app.get("/api/users/username/:username/delete",
+                UserController.userController.deleteUsersByUsername);
         }
         return UserController.userController;
     }
@@ -117,6 +119,16 @@ export default class UserController implements UserControllerI {
         UserController.userDao.deleteUser(req.params.uid)
             .then((status) => res.send(status));
 
+    /**
+     * Removes a user instance from the database
+     * @param {Request} req Represents request from client, including path
+     * parameter username identifying the user to be removed
+     * @param {Response} res Represents response to client, including status
+     * on whether deleting a user was successful or not
+     */
+    deleteUsersByUsername = (req: Request, res: Response) =>
+        UserController.userDao.deleteUsersByUsername(req.params.username)
+            .then(status => res.send(status));
     /**
      * Removes all user instances from the database. Useful for testing
      * @param {Request} req Represents request from client
