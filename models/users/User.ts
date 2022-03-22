@@ -20,7 +20,7 @@ export default interface User{
     maritalStatus?: MaritalStatus,
     biography?: string,
     dateOfBirth?: Date,
-    joined: Date,
+    joined?: Date,
     location?: Location,
     salary?: number
 };
