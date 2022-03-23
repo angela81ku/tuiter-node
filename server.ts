@@ -17,7 +17,6 @@ mongoose.connect(mongoURL);
 
 
 const app = express();
-app.use(express.json());
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:3000'
@@ -39,6 +38,7 @@ if (process.env.ENVIRONMENT === 'PRODUCTION') {
 }
 
 app.use(session(sess))
+app.use(express.json());
 
 
 app.get('/hello', (req: Request, res: Response) =>
