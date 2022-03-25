@@ -88,4 +88,8 @@ export default class LikeController implements LikeControllerI {
     userUnlikesTuit = (req: Request, res: Response) =>
         LikeController.likeDao.userUnlikesTuit(req.params.uid, req.params.tid)
             .then(status => res.send(status));
+
+    userTogglesTuitLikes(req: Request, res: Response): void {
+        //
+    }
 };

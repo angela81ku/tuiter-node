@@ -31,7 +31,9 @@ export default class TuitDao implements TuitDaoI{
      * database
      */
     findAllTuits = async (): Promise<Tuit[]> =>
-        TuitModel.find();
+        TuitModel.find()
+            .populate("postedBy")
+            .exec();
 
     /**
      * Uses TuitModel to retrieve all tuit documents by specified user from tuits collection
@@ -40,7 +42,10 @@ export default class TuitDao implements TuitDaoI{
      * database
      */
     findAllTuitsByUser = async (uid: string): Promise<Tuit[]> =>
-        TuitModel.find({postedBy: uid});
+        TuitModel.find({postedBy: uid})
+            .sort({'postedOn': -1})
+            .populate("postedBy")
+            .exec();
 
     /**
      * Uses TuitModel to retrieve specified tuit documents from tuits collection
@@ -86,8 +91,17 @@ export default class TuitDao implements TuitDaoI{
     deleteTuitByContent = async (tc: string): Promise<any> =>
         TuitModel.deleteOne({tuit: tc});
 
-
-
+    /**
+     * update a tuit like via the specified tid and its status
+     * @param {string}tid  primary key of a tuit object
+     * @param {any} newStates updated Tuit properties(likes, retuit, retweets)
+     * @returns Promise to be notified when the Tuit is updated
+     */
+    updateLikes = async (tid: string, newStats: any): Promise<any> =>
+        TuitModel.updateOne(
+            {_id: tid},
+            {$set: {stats: newStats}}
+        );
 
 
 }
