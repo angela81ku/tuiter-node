@@ -7,6 +7,7 @@ import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
 import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
+import DislikeController from "./controllers/DislikeController";
 const cors = require('cors');
 const session = require("express-session");
 // import TuitDao from "./daos/TuitDao";
@@ -19,7 +20,7 @@ mongoose.connect(mongoURL);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: ["http://localhost:3000", "https://sharp-mccarthy-caf2ab.netlify.app"]
 }));
 
 const SECRET = 'process.env.SECRET';
@@ -27,10 +28,13 @@ let sess = {
     secret: SECRET,
     saveUninitialized: true,
     resave: true,
+    // proxy: true,
     cookie: {
-        secure: true,
-        sameSite: "none"
-        // secure:false
+        // the following used in production only
+        // secure: true,
+        // sameSite: "none"
+        // the following used in development only
+        secure:false
     }
 }
 
@@ -42,7 +46,8 @@ if (process.env.ENVIRONMENT === 'PRODUCTION') {
 app.use(session(sess))
 app.use(express.json());
 
-
+app.get('/', (req: Request, res: Response) =>
+    res.send('app start success'));
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World! try!!'));
 
@@ -52,6 +57,7 @@ app.get('/add/:a/:b/:c', (req: Request, res: Response) =>
 const tuitController = (TuitController.getInstance(app));
 const userController = UserController.getInstance(app);
 const likeController = LikeController.getInstance(app);
+const dislikeController = DislikeController.getInstance(app);
 const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const messageController = MessageController.getInstance(app);

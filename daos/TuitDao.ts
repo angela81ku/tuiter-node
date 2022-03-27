@@ -103,5 +103,17 @@ export default class TuitDao implements TuitDaoI{
             {$set: {stats: newStats}}
         );
 
+    /**
+     * update a tuit dislike via the specified tid and its status
+     * @param {string}tid  primary key of a tuit object
+     * @param {any} newStates updated Tuit properties(likes ,dislike, retuit, retweets)
+     * @returns Promise to be notified when the Tuit is updated
+     */
+    updateDislikes = async (tid: string, newStats: any): Promise<any> =>
+        TuitModel.updateOne(
+            {_id: tid},
+            {$set: {stats: newStats}}
+        );
+
 
 }
