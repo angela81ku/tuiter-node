@@ -28,7 +28,7 @@ let sess = {
     secret: SECRET,
     saveUninitialized: true,
     resave: true,
-    // proxy: true,
+    proxy: true,
     cookie: {
         // the following used in production only
         secure: true,
