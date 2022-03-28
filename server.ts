@@ -31,10 +31,10 @@ let sess = {
     // proxy: true,
     cookie: {
         // the following used in production only
-        // secure: true,
-        // sameSite: "none"
+        secure: true,
+        sameSite: "none"
         // the following used in development only
-        secure:false
+        // secure:false
     }
 }
 
