@@ -20,8 +20,9 @@ mongoose.connect(mongoURL);
 const app = express();
 app.use(cors({
     credentials: true,
-    // origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app/", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
-    origin: "https://sharp-mccarthy-caf2ab.netlify.app/"
+    origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app/", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
+    //origin: "http://localhost:3000"
+    // origin: "*"
 }));
 
 const SECRET = 'process.env.SECRET';
@@ -34,7 +35,7 @@ let sess = {
         // the following used in production only
         secure: true,
         sameSite: "none"
-        // the following used in development only
+        // // the following used in development only
         // secure:false
     }
 }
