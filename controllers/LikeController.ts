@@ -82,7 +82,7 @@ export default class LikeController implements LikeControllerI {
                     if(like.tuit !== null){
 
                     like.tuit.stats.likedByMe = true
-                        console.log(like)
+                        //console.log(like)
                     }
 
                 })
