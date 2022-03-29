@@ -20,30 +20,40 @@ mongoose.connect(mongoURL);
 const app = express();
 app.use(cors({
     credentials: true,
-    // origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app/", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
-    origin: true
-    // origin: "http://localhost:3000"
+    // origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
+    // origin: true
+    origin: "http://localhost:3000"
     // origin: "*"
 }));
 
-const SECRET = 'process.env.SECRET';
+// const SECRET = 'process.env.SECRET';
+// let sess = {
+//     secret: SECRET,
+//     saveUninitialized: true,
+//     resave: true,
+//     proxy: true,
+//     cookie: {
+//         // the following used in production only
+//         // secure: true,
+//         // sameSite: "none"
+//         // // the following used in development only
+//         secure:false
+//     }
+// }
+
 let sess = {
-    secret: SECRET,
+    secret: process.env.SECRET,
     saveUninitialized: true,
     resave: true,
-    proxy: true,
     cookie: {
-        // the following used in production only
-        // secure: true,
-        // sameSite: "none"
-        // // the following used in development only
-        secure:false
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === "production",
     }
 }
 
 if (process.env.ENVIRONMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
+    //sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
