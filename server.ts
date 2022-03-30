@@ -6,6 +6,8 @@ import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
 import AuthenticationController from "./controllers/AuthenticationController";
+import SessionController from "./controllers/SessionController";
+
 import mongoose from "mongoose";
 import DislikeController from "./controllers/DislikeController";
 const cors = require('cors');
@@ -20,8 +22,8 @@ mongoose.connect(mongoURL);
 const app = express();
 app.use(cors({
     credentials: true,
-    // origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
-    origin: "https://sharp-mccarthy-caf2ab.netlify.app"
+     origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
+    //origin: "https://sharp-mccarthy-caf2ab.netlify.app"
     // origin: true
     // origin: "http://localhost:3000"
     // origin: "*"
@@ -52,9 +54,9 @@ let sess = {
     }
 }
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+if (process.env.NODE_ENV === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
-    //sess.cookie.secure = true // serve secure cookies
+    // sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
@@ -75,8 +77,9 @@ const dislikeController = DislikeController.getInstance(app);
 const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const messageController = MessageController.getInstance(app);
-const authenticationController = AuthenticationController(app);
 
+SessionController(app);
+AuthenticationController(app);
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
 // app.listen(process.env.PORT);
