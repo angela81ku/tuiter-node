@@ -20,7 +20,8 @@ mongoose.connect(mongoURL);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
+    // origin: ["http://localhost:3000","http://localhost:3000$/", "https://sharp-mccarthy-caf2ab.netlify.app", "https://sharp-mccarthy-caf2ab.netlify.app$/"]
+    origin: "https://sharp-mccarthy-caf2ab.netlify.app"
     // origin: true
     // origin: "http://localhost:3000"
     // origin: "*"
